@@ -14,4 +14,4 @@
 - Edit Customer Employee info
 
 
-- [ ] Note not all parts check input validation
+- [ ] Not all parts check input validation
