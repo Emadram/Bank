@@ -1094,6 +1094,8 @@ void employeeMaker()
     outfile = fopen ("dat\\employee.dat", "a");
     fwrite(&employee, sizeof(struct Employee), 1, outfile);
 
+    /*                                              */
+    
     putchar('\n');
     TAB_TAB2;
 
@@ -1198,8 +1200,8 @@ void doEdit(struct Customer *customer)
 
 /**
  *Function for depositing
- *@param customer Giving customer info
- *@param code 0 for default 1 for loan
+ * @param customer Giving customer info
+ * @param code 0 for default 1 for loan
  */
 void doDeposit(struct Customer customer, int code)
 {
@@ -1393,8 +1395,8 @@ void doTransfer(struct Customer customer)
         system("cls");
         return;
     }
+    
     int fIdx = findAccountNo(transfer.transaction.account, accNo);
-
     /*                                              */
 
     TAB_TAB2;
@@ -1533,7 +1535,7 @@ void customerTransaction(struct Customer customer)
 }
 
 /**
- * Function for creating new account for customer
+ *Function for creating new account for customer
  * @param customer Giving customer info
  */
 void createAccount(struct Customer customer)
@@ -1596,7 +1598,7 @@ void createAccount(struct Customer customer)
 }
 
 /**
- * Function for displaying customer accounts almost like a helper function
+ *Function for displaying customer accounts almost like a helper function
  * @param customer Giving customer info
  * @param code For privacy 1 otherwise 0 ; 1 is used for transaction
  */
@@ -1767,8 +1769,8 @@ void customerDashBoard(struct Customer customer)
 }
 
 /**
- *
- * @param person
+ *Function for employeeDashBoard interface
+ * @param employee
  */
 void employeeDashBoard(struct Employee employee)
 {
@@ -1835,7 +1837,7 @@ void employeeDashBoard(struct Employee employee)
 }
 
 /**
- * Function for login interface
+ *Function for login interface
  * @param pos position -> 1-Person 2-Customer 3-Employee
  */
 void personLogin(int pos)
@@ -1917,7 +1919,7 @@ void personLogin(int pos)
 }
 
 /**
- * Function for showing options and returning status code
+ *Function for showing options and returning status code
  * @return Status code
  */
 int menu()
@@ -1939,7 +1941,7 @@ int menu()
 }
 
 /**
- * Function for showing option for login and returning status code
+ *Function for showing option for login and returning status code
  * @return Status code
  */
 int login()//login
@@ -1991,7 +1993,7 @@ int create()//create
 }
 
 /**
- * Function for doing the action of the giving option
+ *Function for doing the action of the giving option
  * @param choice chosen option
  */
 void option(int choice)
