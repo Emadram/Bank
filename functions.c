@@ -5,7 +5,7 @@ static int transactionIdNo = 0;
 static int logId = 0;
 
 /**
- * Function to get a digit and the newline character
+ *Function to get a digit and the newline character
  * @param value giving address of int
  */
 void getInt(int *value)
@@ -15,7 +15,7 @@ void getInt(int *value)
 }
 
 /**
- * Function helper for menu
+ *Function helper for menu
  * @param times  number of times to print X_HOLDER
  */
 void menuHelper(int times)
@@ -38,7 +38,7 @@ void menuHelper(int times)
 }
 
 /**
- * Function helper for Person dashboard
+ *Function helper for Person dashboard
  * @param per person info
  */
 void menuHelper2(struct Person per)
@@ -57,7 +57,7 @@ void menuHelper2(struct Person per)
 }
 
 /**
- * Function helper for Customer dashboard
+ *Function helper for Customer dashboard
  * @param customer customer info
  */
 void menuHelper3(struct Customer customer)
@@ -207,7 +207,7 @@ int withdrawHelper(struct Transaction *transaction, int idx)
 }
 
 /**
- * Function for writing create log into log.dat
+ *Function for writing create log into log.dat
  * @param name Person, Customer or Employee
  * @param pKey privateKey of the account
  */
@@ -231,7 +231,7 @@ void createLog(char name[], int pKey)
 }
 
 /**
- * Function for writing login log into log.dat
+ *Function for writing login log into log.dat
  * @param name Person, Customer or Employee
  * @param per Person info
  */
@@ -258,8 +258,8 @@ void loginLog(char name[], struct Person per)
 
 /**
  *Function for writing created account log into log.dat
- *@param accCust accounts info
- *@param cust customer info
+ * @param accCust accounts info
+ * @param cust customer info
  */
 void createAccLog(struct AccountCustomer accCust, struct Customer cust)
 {
@@ -301,7 +301,7 @@ void createTransactionLog(struct Transaction transAct, struct Transaction transA
     if (logId == 0)
         fprintf(report, "%s\n%s\n", D_LINE, D_LINE);
 
-    if (code == 1)//deposit
+    if (code == 1) //deposit
     {
         fprintf(report, "%d-%sA %s by account number = [%u] and transactionId = [%d] "
                         "and amount = [$%s] has been made account Pkey = [%d] customer Pkey = [%d]",
@@ -309,7 +309,7 @@ void createTransactionLog(struct Transaction transAct, struct Transaction transA
                 transAct.transactionId-1, transAct.value, transAct.account.primaryKey,
                 transAct.account.customerKey);
     }
-    else if (code == 2)// withdraw
+    else if (code == 2) //withdraw
     {
         fprintf(report, "%d-%sA %s by account number = [%u] and transactionId = [%d] "
                         "and amount = [-$%s] has been made account Pkey = [%d] customer Pkey = [%d]",
@@ -318,7 +318,7 @@ void createTransactionLog(struct Transaction transAct, struct Transaction transA
                 transAct.account.customerKey);
     }
 
-    else//transfer
+    else //transfer
     {
         fprintf(report, "%d-%sA %s from account number = [%u] to account number = [%u] with transactionId = [%d] "
                         "and amount = [-$%s] has been made account Pkey = [%d] customer Pkey = [%d] to"
@@ -352,6 +352,7 @@ void employeeInfo()
                emp.primaryKey, emp.person.nationalCode,
                emp.person.name, emp.person.lastName, emp.person.age);
         TAB_TAB2;
+        
         if (emp.person.gender == MALE)
         {
             printf(" Gender = [MALE]");
@@ -388,6 +389,7 @@ void employeeInfo()
         TAB_TAB2;
         puts(D_LINE);
     }
+    
     TAB_TAB2;
     puts(CHA_HOLDER);
     system("pause");
@@ -395,8 +397,10 @@ void employeeInfo()
     TAB_TAB;
     puts("Enter Employee nationalCode or \"cancel\" to cancel the edit operation:");
     TAB_TAB;
+    
     fgets(code, MIN_SIZE, stdin);
     code[strlen(code)-1] = '\0';
+    
     if (strcmp(code,"cancel") == 0)
     {
         TAB_TAB2;
@@ -405,6 +409,7 @@ void employeeInfo()
         system("cls");
         return;
     }
+    
     struct Person per;
     strcpy(per.nationalCode, code);
 
@@ -412,41 +417,52 @@ void employeeInfo()
 
     menuHelper4(emp);
     TAB_TAB2;
-    puts("*Notice if you don't want to change the area enter 0\n");
+    puts("*If you don't want to change the area enter 0\n");
     TAB_TAB2;
     puts("   Edit info:");
     TAB_TAB;
     puts("New name:");
     TAB_TAB;
+    
     fgets(code, MIN_SIZE, stdin);
     code[strlen(code)-1] = '\0';
+    
     if (code[0] != '0')
     {
         strcpy(emp.person.name, code);
     }
+    
     TAB_TAB;
     puts("New lastName:");
     TAB_TAB;
+    
     fgets(code, MIN_SIZE, stdin);
     code[strlen(code)-1] = '\0';
+    
     if (code[0] != '0')
     {
         strcpy(emp.person.lastName, code);
     }
+    
     TAB_TAB;
     puts("New nCode:");
     TAB_TAB;
+    
     fgets(code, MIN_SIZE, stdin);
     code[strlen(code)-1] = '\0';
+    
     if (code[0] != '0')
     {
         strcpy(emp.person.nationalCode, code);
     }
+    
     TAB_TAB;
     puts("New age:");
     TAB_TAB;
+    
     fgets(code, MIN_SIZE, stdin);
     code[strlen(code)-1] = '\0';
+    
     if (code[0] != '0')
     {
         char *check;
@@ -458,9 +474,10 @@ void employeeInfo()
             return;
         }
     }
+    
     updateEmployee(emp,idx);
-
     fclose(outfile);
+    
     TAB_TAB2;
     puts("Operation has been completed");
     system("pause");
@@ -478,6 +495,7 @@ void customerInfo()
 
     puts("\n\n");
     outfile = fopen ("dat\\customer.dat", "r");
+    
     while(fread(&cust, sizeof(struct Customer), 1, outfile))
     {
         TAB_TAB2;
@@ -485,6 +503,7 @@ void customerInfo()
                cust.primaryKey, cust.person.nationalCode,
                cust.person.name, cust.person.lastName, cust.person.age);
         TAB_TAB2;
+        
         if (cust.person.gender == MALE)
         {
             printf(" Gender = [MALE]");
@@ -528,8 +547,10 @@ void customerInfo()
     TAB_TAB;
     puts("Enter Customer nationalCode or \"cancel\" to cancel the edit operation:");
     TAB_TAB;
+    
     fgets(code, MIN_SIZE, stdin);
     code[strlen(code)-1] = '\0';
+    
     if (strcmp(code,"cancel") == 0)
     {
         TAB_TAB2;
@@ -545,7 +566,7 @@ void customerInfo()
 
     menuHelper3(cust);
     TAB_TAB2;
-    puts("*Notice if you don't want to change the area enter 0\n");
+    puts("*If you don't want to change the area enter 0\n");
     TAB_TAB2;
     puts("   Edit info:");
     TAB_TAB;
@@ -665,11 +686,13 @@ void readFile(char fileName[MIN_SIZE])
 void updateAccount(struct AccountCustomer accCust, int idx)
 {
     FILE *outfile = fopen ("dat\\accounts.dat", "r+");
+    
     if (outfile == NULL)
     {//working
         printf("Error %d \n", errno);
         printf("It's null");
     }
+    
     fseek(outfile,sizeof(struct AccountCustomer) * idx ,SEEK_CUR);// To set the pointer on the wanted account
     fwrite (&accCust, sizeof(struct AccountCustomer), 1, outfile);
 
@@ -689,6 +712,7 @@ void updateCustomer(struct Customer cust, int idx)
         printf("Error %d \n", errno);
         printf("It's null");
     }
+    
     fseek(outfile,sizeof(struct Customer) * idx ,SEEK_CUR);// To set the pointer on the wanted account
     fwrite (&cust, sizeof(struct Customer), 1, outfile);
 
@@ -838,9 +862,9 @@ int findEmployee(struct Person person, struct Employee *employee)
 
 /**
  *Function to find the giving customer account
- *@param accCust Address of accountcustomer
- *@param pKey Private key of customer
- *@return Index of account -2 otherwise
+ * @param accCust Address of accountcustomer
+ * @param pKey Private key of customer
+ * @return Index of account -2 otherwise
  */
 int findAccount(struct AccountCustomer *accCust, int pKey)
 {
@@ -867,9 +891,9 @@ int findAccount(struct AccountCustomer *accCust, int pKey)
 
 /**
  *Function to find the giving accountNo
- *@param accCust Main account
- *@param accNo Account number
- *@return Index of account number -2 otherwise
+ * @param accCust Main account
+ * @param accNo Account number
+ * @return Index of account number -2 otherwise
  */
 int findAccountNo(struct AccountCustomer accCust, int accNo)
 {
@@ -891,28 +915,35 @@ void personMaker()
     int static personIndexer = 0;
     int static personCount = 0;
     struct Person person;
+    
     menuHelper(5);
     TAB_TAB2;
     puts("   Create Person:");
+    
     TAB_TAB;//name
     printf("Enter the name: ");
     fgets(person.name, MIN_SIZE, stdin);
     person.name[strlen(person.name)-1] = '\0';
+    
     TAB_TAB;//lastname
     printf("Enter the lastname: ");
     fgets(person.lastName, MIN_SIZE, stdin);
     person.lastName[strlen(person.lastName)-1] = '\0';
+    
     TAB_TAB;//nationalCode
     printf("Enter the nationalCode: ");
     fgets(person.nationalCode, MIN_SIZE, stdin);
     person.nationalCode[strlen(person.nationalCode)-1] = '\0';
+    
     TAB_TAB;//age
     printf("Enter the age: ");
     getInt(&person.age);
+    
     TAB_TAB;//gender
     int gen;
     printf("Enter the gender:\n%s0:MALE\n%s1:FEMALE\n%s2:OTHER\n%s", MULTI_TAB, MULTI_TAB, MULTI_TAB, MULTI_TAB);
     getInt(&gen);
+    
     switch (gen)
     {
         case 0:
@@ -1004,11 +1035,6 @@ void customerMaker()
     ++accountIndexer;
     accCust.customerKey = customer.primaryKey;//
     accCust.count = 0;
-//    for (int i = 0; i < MIN_ACC; ++i) {
-//        accCust.accountNumber[i].type = SALARY;
-//        accCust.accountNumber[i].accountNumber = 3333;
-//        strcpy(accCust.accountNumber[i].value, "0");
-//    }
 
     //file
     FILE *outfile;
